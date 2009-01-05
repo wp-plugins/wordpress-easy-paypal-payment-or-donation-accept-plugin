@@ -11,7 +11,7 @@ Easy to use Wordpress plugin to accept paypal payment for a service or product o
 == Description ==
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in multiple currencies in one click. Can be used in the sidebar, posts and pages.
 
-For information and updates, please visit:
+For screenshots, more information and updates, please visit:
 http://www.tipsandtricks-hq.com/?page_id=120
 
 Usage:
@@ -24,7 +24,7 @@ There are three ways you can use this plugin:
 
 == Installation ==
 
-1. Unzip and Upload the folder 'WP-accept-paypal-payment' to the '/wp-content/plugins/' directory
+1. Unzip and Upload the folder 'WP-accept-paypal-payment' to the '/wp-content/plugins/' directory (It is important that the name of this plugin directory is 'WP-accept-paypal-payment' so rename the directory if necessary. For example if the directory name is something like 'wordpress-easy-paypal-payment-plugin' after unzipping, then rename that directory to 'WP-accept-paypal-payment' and upload it to your '/wp-content/plugins/' directory).
 2. Activate the plugin through the 'Plugins' menu in WordPress
 3. Go to Settings and configure the options eg. your email, Subject text etc.
 4. Use the Widget or add the trigger text <!-- wp_paypal_payment --> to a post or page where u want it to appear.
@@ -35,6 +35,6 @@ There are three ways you can use this plugin:
 3. Can this plugin be used to accept paypal payment for a service or a product? Yes
 
 == Screenshots ==
-
-1. Check out this Plugin in action at http://www.antique-hq.com/written-appraisal
+Visit the plugin site at for screenshots.
+Check out this Plugin in action at http://www.antique-hq.com/written-appraisal
 
