@@ -11,7 +11,7 @@ Easy to use Wordpress plugin to accept paypal payment for a service or product o
 == Description ==
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in multiple currencies in one click. Can be used in the sidebar, posts and pages.
 
-For information and updates, please visit:
+For screenshots, more information and updates, please visit:
 http://www.tipsandtricks-hq.com/?page_id=120
 
 Usage:
@@ -35,6 +35,6 @@ There are three ways you can use this plugin:
 3. Can this plugin be used to accept paypal payment for a service or a product? Yes
 
 == Screenshots ==
-
-1. Check out this Plugin in action at http://www.antique-hq.com/written-appraisal
+Visit the plugin site at for screenshots.
+Check out this Plugin in action at http://www.antique-hq.com/written-appraisal
 
