@@ -19,7 +19,7 @@ Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a 
     GNU General Public License for more details.
 */
 
-$wp_paypal_payment_version = 2.2.1;
+$wp_paypal_payment_version = 2.2;
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
