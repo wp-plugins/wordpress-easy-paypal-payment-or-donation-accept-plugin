@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v2.2
+Version: v2.2.1
 Plugin URI: http://www.tipsandtricks-hq.com/?page_id=120
 Author: Ruhul Amin
 Author URI: http://www.antique-hq.com/
@@ -19,7 +19,7 @@ Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a 
     GNU General Public License for more details.
 */
 
-$wp_paypal_payment_version = 2.2;
+$wp_paypal_payment_version = 2.2.1;
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
@@ -317,7 +317,7 @@ function wp_paypal_payment_widget_control()
 {
     ?>
     <p>
-    <a href="options-general.php?page=WP-accept-paypal-payment/WP_Accept_Paypal_Payment.php"><? _e("Settings", "paypal_payment_options_page"); ?></a>
+    <? _e("Set the Plugin Settings from the Settings menu"); ?>
     </p>
     <?php
 
