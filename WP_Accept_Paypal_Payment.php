@@ -1,8 +1,8 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v2.2.1
-Plugin URI: http://www.tipsandtricks-hq.com/?p=120
+Version: v2.4
+Plugin URI: http://www.tipsandtricks-hq.com/?page_id=120
 Author: Ruhul Amin
 Author URI: http://www.antique-hq.com/
 Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages.
@@ -19,7 +19,7 @@ Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a 
     GNU General Public License for more details.
 */
 
-$wp_paypal_payment_version = 2.2;
+$wp_paypal_payment_version = 2.4;
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
@@ -33,6 +33,10 @@ add_option('wp_pp_payment_item3', 'Platinum Service - $30');
 add_option('wp_pp_payment_value3', '30');
 add_option('wp_paypal_widget_title_name', 'Paypal Payment');
 add_option('payment_button_type', 'https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif');
+add_option('wp_pp_show_other_amount', '-1');
+add_option('wp_pp_show_ref_box', '1');      
+add_option('wp_pp_ref_title', 'Your Email Address');
+add_option('wp_pp_return_url', get_bloginfo('home'));
 
 function Paypal_payment_accept()
 {
@@ -53,6 +57,10 @@ function Paypal_payment_accept()
     $itemName6 = get_option('wp_pp_payment_item6');
     $value6 = get_option('wp_pp_payment_value6');
     $payment_button = get_option('payment_button_type');
+    $wp_pp_show_other_amount = get_option('wp_pp_show_other_amount');
+    $wp_pp_show_ref_box = get_option('wp_pp_show_ref_box');
+	$wp_pp_ref_title = get_option('wp_pp_ref_title');
+	$wp_pp_return_url = get_option('wp_pp_return_url');
 
     /* === Paypal form === */
     $output .= '
@@ -87,16 +95,38 @@ function Paypal_payment_accept()
     }
 
     $output .= '</select>';
+
+	// Show other amount text box
+	if ($wp_pp_show_other_amount == '1')
+	{
+    	$output .= '<br /><br /><strong>Other Amount:</strong>';
+    	$output .= '<br /><br /><input type="text" name="amount" size="10" title="Other donate" value="" />';
+	}
+	
+	// Show the reference text box
+	if ($wp_pp_show_ref_box == '1')
+	{
+		$output .= "<br /><br /><strong> $wp_pp_ref_title :</strong>";
+    	$output .= '<input type="hidden" name="on0" value="Reference" />';
+    	$output .= '<br /><br /><input type="text" name="os0" maxlength="60" />';
+	}
+    
     $output .= '
-    <br /><br />
-    <input type="hidden" name="on0" value="Your Email  Address" /><strong>Your Email  Address:</strong>
-    <br /><br />
-    <input type="text" name="os0" maxlength="60" />
         <br /><br />
         <input type="hidden" name="no_shipping" value="2" />
         <input type="hidden" name="no_note" value="1" />
+        <input type="hidden" name="mrb" value="3FWGC6LFTMTUG" />
         <input type="hidden" name="bn" value="IC_Sample" />
     ';
+    if (!empty($wp_pp_return_url)) 
+    {
+		$output .= '<input type="hidden" name="return" value="'.$wp_pp_return_url.'" />';
+	} 
+	else 
+	{
+		$output .='<input type="hidden" name="return" value="'. get_bloginfo('home') .'" />';
+	}
+		
     $output .= "<input type=\"image\" src=\"$payment_button\" name=\"submit\" alt=\"Make payments with payPal - it's fast, free and secure!\" />";
     $output .= '</form>';
     /* = end of paypal form = */
@@ -134,18 +164,23 @@ function paypal_payment_options_page() {
         update_option('paypal_payment_currency', (string)$_POST["paypal_payment_currency"]);
         update_option('wp_pp_payment_subject', (string)$_POST["wp_pp_payment_subject"]);
         update_option('wp_pp_payment_item1', (string)$_POST["wp_pp_payment_item1"]);
-        update_option('wp_pp_payment_value1', (int)$_POST["wp_pp_payment_value1"]);
+        update_option('wp_pp_payment_value1', (double)$_POST["wp_pp_payment_value1"]);
         update_option('wp_pp_payment_item2', (string)$_POST["wp_pp_payment_item2"]);
-        update_option('wp_pp_payment_value2', (int)$_POST["wp_pp_payment_value2"]);
+        update_option('wp_pp_payment_value2', (double)$_POST["wp_pp_payment_value2"]);
         update_option('wp_pp_payment_item3', (string)$_POST["wp_pp_payment_item3"]);
-        update_option('wp_pp_payment_value3', (int)$_POST["wp_pp_payment_value3"]);
+        update_option('wp_pp_payment_value3', (double)$_POST["wp_pp_payment_value3"]);
         update_option('wp_pp_payment_item4', (string)$_POST["wp_pp_payment_item4"]);
-        update_option('wp_pp_payment_value4', (int)$_POST["wp_pp_payment_value4"]);
+        update_option('wp_pp_payment_value4', (double)$_POST["wp_pp_payment_value4"]);
         update_option('wp_pp_payment_item5', (string)$_POST["wp_pp_payment_item5"]);
-        update_option('wp_pp_payment_value5', (int)$_POST["wp_pp_payment_value5"]);
+        update_option('wp_pp_payment_value5', (double)$_POST["wp_pp_payment_value5"]);
         update_option('wp_pp_payment_item6', (string)$_POST["wp_pp_payment_item6"]);
-        update_option('wp_pp_payment_value6', (int)$_POST["wp_pp_payment_value6"]);
+        update_option('wp_pp_payment_value6', (double)$_POST["wp_pp_payment_value6"]);
         update_option('payment_button_type', (string)$_POST["payment_button_type"]);
+        update_option('wp_pp_show_other_amount', ($_POST['wp_pp_show_other_amount']=='1') ? '1':'-1' );
+        update_option('wp_pp_show_ref_box', ($_POST['wp_pp_show_ref_box']=='1') ? '1':'-1' );        
+        update_option('wp_pp_ref_title', (string)$_POST["wp_pp_ref_title"]); 
+        update_option('wp_pp_return_url', (string)$_POST["wp_pp_return_url"]);       
+                
         echo 'Options Updated!';
         echo '</strong></p></div>';
     }
@@ -269,7 +304,30 @@ function paypal_payment_options_page() {
     <input name="wp_pp_payment_value6" type="text" size="10" value="<?php echo get_option('wp_pp_payment_value6'); ?>"/>
     <br /><i>Enter the name of the service or product and the price. eg. Enter "Basic service - $10" in the Payment Option text box and "10.00" in the price text box to accept a payment of $10 for "Basic service". Leave the Payment Option and Price fields empty if u don't want to use that option. For example, if you have 3 price options then fill in the top 3 and leave the rest empty.</i>
     </td></tr>
-
+    
+    <br /><br />
+    <tr valign="top"><td width="25%" align="right">
+    <strong>Show Other Amount :</strong>
+    </td><td align="left">
+    <input name="wp_pp_show_other_amount" type="checkbox"<?php if(get_option('wp_pp_show_other_amount')!='-1') echo ' checked="checked"'; ?> value="1"/>
+	<i> Tick this checkbox if you want to show ohter amount text box to your visitors so they can enter custom amount.</i>
+	</td></tr>
+	
+	<br />
+    <tr valign="top"><td width="25%" align="right">
+    <strong>Show Reference Text Box :</strong>
+    </td><td align="left">
+    <input name="wp_pp_show_ref_box" type="checkbox"<?php if(get_option('wp_pp_show_ref_box')!='-1') echo ' checked="checked"'; ?> value="1"/>
+	<i> Tick this checkbox if you want your visitors to be able to enter a reference text like email or web address.</i>
+	</td></tr>
+	
+	<tr valign="top"><td width="25%" align="right">
+    <strong>Reference Text Box Title :</strong>
+    </td><td align="left">
+    <input name="wp_pp_ref_title" type="text" size="35" value="<?php echo get_option('wp_pp_ref_title'); ?>"/>
+    <br /><i>Enter a title for the Reference text box (ie. Your Web Address). The visitors will see this text</i><br />
+    </td></tr>
+	
     </table>
 
     <br /><br />
@@ -293,6 +351,11 @@ function paypal_payment_options_page() {
 <td><img border="0" src="https://www.paypal.com/en_US/i/btn/x-click-but11.gif" alt="" /></td>
 </tr>
 </table>
+	
+	<br />
+    <strong>Return URL from PayPal :</strong>
+    <input name="wp_pp_return_url" type="text" size="60" value="<?php echo get_option('wp_pp_return_url'); ?>"/>
+    <br /><i>Enter a return URL (could be a Thank You page). PayPal will redirect visitors to this page after Payment</i><br />
 
     </fieldset>
 
@@ -304,13 +367,15 @@ function paypal_payment_options_page() {
     </div><?php
 }
 
-function show_wp_paypal_payment_widget()
+function show_wp_paypal_payment_widget($args)
 {
+	extract($args);
+	
     $wp_paypal_payment_widget_title_name_value = get_option('wp_paypal_widget_title_name');
-    echo '<h2>';
-    echo $wp_paypal_payment_widget_title_name_value;
-    echo '</h2><br />';
+    echo $before_widget;
+    echo $before_title . $wp_paypal_payment_widget_title_name_value . $after_title;
     echo Paypal_payment_accept();
+    echo $after_widget;
 }
 
 function wp_paypal_payment_widget_control()
