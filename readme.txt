@@ -4,7 +4,8 @@ Donate link: http://www.tipsandtricks-hq.com/
 Tags: Paypal payment, Accept payment for services or product, PayPal donation
 Requires at least: 3.0
 Tested up to: 3.4.1
-Stable tag: 2.6
+Stable tag: 2.7
+License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click.
 

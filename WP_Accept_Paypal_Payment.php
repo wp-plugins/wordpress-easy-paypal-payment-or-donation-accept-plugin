@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v2.6
+Version: v2.7
 Plugin URI: http://www.tipsandtricks-hq.com/?page_id=120
 Author: Ruhul Amin
 Author URI: http://www.tipsandtricks-hq.com/
@@ -19,7 +19,7 @@ Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a 
     GNU General Public License for more details.
 */
 
-$wp_paypal_payment_version = 2.6;
+$wp_paypal_payment_version = 2.7;
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
@@ -207,7 +207,7 @@ function paypal_payment_options_page() {
 
     <p>There are three ways you can use this plugin:</p>
     <ol>
-    <li>1. Add the trigger text <strong>&lt;!-- wp_paypal_payment --&gt;</strong> to a post or page</li>
+    <li>1. Add the shortcode <strong>[wp_paypal_payment]</strong> to a post or page</li>
     <li>2. Call the function from a template file: <strong>&lt;?php echo Paypal_payment_accept(); ?&gt;</strong></li>
     <li>3. Use the <strong>WP Paypal Payment</strong> Widget from the Widgets menu</li>
     </ol>
@@ -397,6 +397,7 @@ function widget_wp_paypal_payment_init()
 }
 
 add_filter('the_content', 'wp_ppp_process');
+add_shortcode('wp_paypal_payment', 'Paypal_payment_accept');
 
 add_action('init', 'widget_wp_paypal_payment_init');
 
