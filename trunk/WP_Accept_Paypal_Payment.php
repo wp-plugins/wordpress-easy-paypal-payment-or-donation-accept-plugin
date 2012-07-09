@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v2.4
+Version: v2.6
 Plugin URI: http://www.tipsandtricks-hq.com/?page_id=120
 Author: Ruhul Amin
-Author URI: http://www.antique-hq.com/
+Author URI: http://www.tipsandtricks-hq.com/
 Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages.
 */
 
@@ -19,7 +19,7 @@ Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a 
     GNU General Public License for more details.
 */
 
-$wp_paypal_payment_version = 2.4;
+$wp_paypal_payment_version = 2.6;
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
@@ -63,6 +63,7 @@ function Paypal_payment_accept()
 	$wp_pp_return_url = get_option('wp_pp_return_url');
 
     /* === Paypal form === */
+    $output .= '<div id="accept_paypal_payment_form">';
     $output .= '
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
         <input type="hidden" name="cmd" value="_xclick" />
@@ -113,7 +114,7 @@ function Paypal_payment_accept()
     
     $output .= '
         <br /><br />
-        <input type="hidden" name="no_shipping" value="2" />
+        <input type="hidden" name="no_shipping" value="0" />
         <input type="hidden" name="no_note" value="1" />
         <input type="hidden" name="mrb" value="3FWGC6LFTMTUG" />
         <input type="hidden" name="bn" value="IC_Sample" />
@@ -129,6 +130,7 @@ function Paypal_payment_accept()
 		
     $output .= "<input type=\"image\" src=\"$payment_button\" name=\"submit\" alt=\"Make payments with payPal - it's fast, free and secure!\" />";
     $output .= '</form>';
+    $output .= '</div>';
     /* = end of paypal form = */
     return $output;
 }
