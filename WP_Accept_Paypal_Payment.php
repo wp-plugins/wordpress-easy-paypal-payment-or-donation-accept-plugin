@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v2.7
-Plugin URI: http://www.tipsandtricks-hq.com/?page_id=120
-Author: Ruhul Amin
+Version: v2.8
+Plugin URI: http://www.tipsandtricks-hq.com/?p=120
+Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
-Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages.
+Description: Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages.
 */
 
 /*
@@ -19,7 +19,7 @@ Plugin Description: Easy to use Wordpress plugin to accept paypal payment for a 
     GNU General Public License for more details.
 */
 
-$wp_paypal_payment_version = 2.7;
+$wp_paypal_payment_version = 2.8;
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
@@ -37,6 +37,33 @@ add_option('wp_pp_show_other_amount', '-1');
 add_option('wp_pp_show_ref_box', '1');      
 add_option('wp_pp_ref_title', 'Your Email Address');
 add_option('wp_pp_return_url', get_bloginfo('home'));
+
+add_shortcode('wp_paypal_payment_box', 'wpapp_buy_now_button_shortcode' );
+function wpapp_buy_now_button_shortcode( $atts, $content ) {
+	extract( shortcode_atts( array(
+			'email' => 'your@paypal-email.com',
+			'currency' => 'USD',
+			'options' => 'Payment for Service 1:15.50|Payment for Service 2:30.00|Payment for Service 3:47.00',
+			'return' => site_url(),
+			'reference' => 'Your Email Address'
+		) , $atts) );
+	$options = explode( '|' , $options);
+	$html_options = '';
+	foreach( $options as $option ) {
+		$option = explode( ':' , $option );
+		$name = esc_attr( $option[0] );
+		$price = esc_attr( $option[1] );
+		$html_options .= "<option data-product_name='{$name}' value='{$price}'>{$name} - {$price}</option>";
+
+	}
+	$payment_button_img_src = get_option('payment_button_type');
+	include_once ('shortcode_view.php');
+}
+
+add_action( 'init', 'wpapp_shortcode_plugin_enqueue_jquery' );
+function wpapp_shortcode_plugin_enqueue_jquery() {
+	wp_enqueue_script('jquery');
+}
 
 function Paypal_payment_accept()
 {
@@ -196,8 +223,9 @@ function paypal_payment_options_page() {
 
     <h2>Accept Paypal Payment Settings v <?php echo $wp_paypal_payment_version; ?></h2>
 
-    <p>For information and updates, please visit:<br />
-    <a href="http://www.tipsandtricks-hq.com/?p=120">http://www.tipsandtricks-hq.com/</a></p>
+    <p>For information and updates, please visit the plugin page at the following URL:<br />
+    <a href="http://www.tipsandtricks-hq.com/?p=120">http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120</a>
+    </p>
 
     <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
     <input type="hidden" name="info_update" id="info_update" value="true" />
@@ -205,11 +233,13 @@ function paypal_payment_options_page() {
     <fieldset class="options">
     <legend>Usage:</legend>
 
-    <p>There are three ways you can use this plugin:</p>
+    <p>There are a few ways you can use this plugin:</p>
     <ol>
-    <li>1. Add the shortcode <strong>[wp_paypal_payment]</strong> to a post or page</li>
-    <li>2. Call the function from a template file: <strong>&lt;?php echo Paypal_payment_accept(); ?&gt;</strong></li>
-    <li>3. Use the <strong>WP Paypal Payment</strong> Widget from the Widgets menu</li>
+    <li>Add the shortcode <strong>[wp_paypal_payment]</strong> to a post or page</li>
+    <li>Call the function from a template file: <strong>&lt;?php echo Paypal_payment_accept(); ?&gt;</strong></li>
+    <li>Use the <strong>WP Paypal Payment</strong> Widget from the Widgets menu</li>
+    <li>Use the shortcode with custom parameter option to add multiple different payment widget in different areas of the site.
+    <a href="http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120#shortcode_with_custom_parameters" target="_blank">View documentation</a></li>
     </ol>
 
     </fieldset>
@@ -398,10 +428,10 @@ function widget_wp_paypal_payment_init()
 
 add_filter('the_content', 'wp_ppp_process');
 add_shortcode('wp_paypal_payment', 'Paypal_payment_accept');
+if (!is_admin())
+{add_filter('widget_text', 'do_shortcode');}
 
 add_action('init', 'widget_wp_paypal_payment_init');
 
 // Insert the paypal_payment_add_option_pages in the 'admin_menu'
 add_action('admin_menu', 'paypal_payment_add_option_pages');
-
-?>
