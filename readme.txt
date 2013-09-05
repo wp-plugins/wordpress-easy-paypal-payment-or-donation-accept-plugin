@@ -3,8 +3,8 @@ Contributors: Ruhul Amin, Tips and Tricks HQ
 Donate link: http://www.tipsandtricks-hq.com
 Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal 
 Requires at least: 3.0
-Tested up to: 3.4.2
-Stable tag: 2.8
+Tested up to: 3.6.1
+Stable tag: 3.0
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -47,5 +47,7 @@ Visit the plugin site at http://www.tipsandtricks-hq.com/?p=120 for screenshots.
 
 == Changelog ==
 
-Changelog can be found at the following URL
+- 3.0 - WordPress 3.6 compatibility update
+
+Changelog for old versions can be found at the following URL
 http://www.tipsandtricks-hq.com/?p=120
