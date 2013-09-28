@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.0
+Version: v3.1
 Plugin URI: http://www.tipsandtricks-hq.com/?p=120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
@@ -19,7 +19,7 @@ Description: Easy to use Wordpress plugin to accept paypal payment for a service
     GNU General Public License for more details.
 */
 
-$wp_paypal_payment_version = 3.0;
+$wp_paypal_payment_version = 3.1;
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
@@ -39,13 +39,15 @@ add_option('wp_pp_ref_title', 'Your Email Address');
 add_option('wp_pp_return_url', get_bloginfo('home'));
 
 add_shortcode('wp_paypal_payment_box', 'wpapp_buy_now_button_shortcode' );
-function wpapp_buy_now_button_shortcode( $atts, $content ) {
+function wpapp_buy_now_button_shortcode($atts) 
+{
 	extract( shortcode_atts( array(
 			'email' => 'your@paypal-email.com',
 			'currency' => 'USD',
 			'options' => 'Payment for Service 1:15.50|Payment for Service 2:30.00|Payment for Service 3:47.00',
 			'return' => site_url(),
-			'reference' => 'Your Email Address'
+			'reference' => 'Your Email Address',
+			'other_amount' => '',
 		) , $atts) );
 	$options = explode( '|' , $options);
 	$html_options = '';
@@ -58,7 +60,7 @@ function wpapp_buy_now_button_shortcode( $atts, $content ) {
 	}
 	$payment_button_img_src = get_option('payment_button_type');
     ob_start();
-	include_once ('shortcode_view.php');
+	include('shortcode_view.php');
 	$output = ob_get_contents();
     ob_end_clean();
     return $output;
@@ -227,15 +229,16 @@ function paypal_payment_options_page() {
 
     <h2>Accept Paypal Payment Settings v <?php echo $wp_paypal_payment_version; ?></h2>
 
-    <p>For information and updates, please visit the plugin page at the following URL:<br />
-    <a href="http://www.tipsandtricks-hq.com/?p=120">http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120</a>
-    </p>
+    <div style="background: none repeat scroll 0 0 #ECECEC;border: 1px solid #CFCFCF;color: #363636;margin: 10px 0 15px;padding:15px;text-shadow: 1px 1px #FFFFFF;">
+    For usage documentation and updates, please visit the plugin page at the following URL:<br />
+    <a href="http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120" target="_blank">http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120</a>
+    </div>
 
     <form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
     <input type="hidden" name="info_update" id="info_update" value="true" />
 
     <fieldset class="options">
-    <legend>Usage:</legend>
+    <h3>Plugin Usage:</h3>
 
     <p>There are a few ways you can use this plugin:</p>
     <ol>
@@ -249,7 +252,7 @@ function paypal_payment_options_page() {
     </fieldset>
 
     <fieldset class="options">
-    <strong><legend>WP Paypal Payment or Donation Accept Plugin Options</legend></strong><br />
+    <strong>WP Paypal Payment or Donation Accept Plugin Options</strong><br />
 
     <strong>WP Paypal Payment Widget Title :</strong>
         <input name="wp_paypal_widget_title_name" type="text" size="30" value="<?php echo get_option('wp_paypal_widget_title_name'); ?>"/>
@@ -396,11 +399,17 @@ function paypal_payment_options_page() {
     </fieldset>
 
     <div class="submit">
-        <input type="submit" name="info_update" value="<?php _e('Update options'); ?> &raquo;" />
+        <input type="submit" class="button-primary" name="info_update" value="<?php _e('Update options'); ?> &raquo;" />
     </div>
-
     </form>
-    </div><?php
+    
+ 	<div style="background: none repeat scroll 0 0 #FFF6D5;border: 1px solid #D1B655;color: #3F2502;margin: 10px 0;padding: 5px 5px 5px 10px;text-shadow: 1px 1px #FFFFFF;">	
+ 	<p>If you need a feature rich and supported plugin for accepting PayPal payment then checkout my <a href="http://www.tipsandtricks-hq.com/wordpress-estore-plugin-complete-solution-to-sell-digital-products-from-your-wordpress-blog-securely-1059" target="_blank">WP eStore Plugin</a>
+    </p>
+    </div>
+    
+    </div><!-- end of .wrap -->
+    <?php
 }
 
 function show_wp_paypal_payment_widget($args)
