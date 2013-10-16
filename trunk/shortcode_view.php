@@ -1,3 +1,29 @@
+<?php 
+
+function wppp_render_paypal_button_form($args)
+{	
+	extract( shortcode_atts( array(
+		'email' => 'your@paypal-email.com',
+		'currency' => 'USD',
+		'options' => 'Payment for Service 1:15.50|Payment for Service 2:30.00|Payment for Service 3:47.00',
+		'return' => site_url(),
+		'reference' => 'Your Email Address',
+		'other_amount' => '',
+		'country_code' => '',
+	), $args));
+	
+	$options = explode( '|' , $options);
+	$html_options = '';
+	foreach( $options as $option ) {
+		$option = explode( ':' , $option );
+		$name = esc_attr( $option[0] );
+		$price = esc_attr( $option[1] );
+		$html_options .= "<option data-product_name='{$name}' value='{$price}'>{$name} - {$price}</option>";
+	}
+	
+	$payment_button_img_src = get_option('payment_button_type');
+	
+?>
 <div class="wp_paypal_button_widget">
 	<form name="_xclick" class="wp_accept_pp_button_form" action="https://www.paypal.com/cgi-bin/webscr" method="post">	
 		<div class="wp_pp_button_selection_section">
@@ -26,6 +52,11 @@
 		<input type="hidden" name="amount" value="">
 		<input type="hidden" name="return" value="<?php echo $return; ?>" />
 		<input type="hidden" name="email" value="" />
+		<?php 
+		if(!empty($country_code)){
+			echo '<input type="hidden" name="lc" value="'.$country_code.'" />';
+		}
+		?>
 		<div class="wp_pp_button_submit_btn">
 			<input type="image" id="buy_now_button" src="<?php echo $payment_button_img_src; ?>" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 		</div>
@@ -40,7 +71,6 @@ margin-bottom: 10px;
 margin: 10px 0;
 }
 </style>
-
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$('.wp_accept_pp_button_form').submit(function(e){	
@@ -58,3 +88,5 @@ jQuery(document).ready(function($) {
 	});
 });
 </script>
+<?php 
+}
