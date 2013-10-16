@@ -1,25 +1,17 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.1
+Version: v3.2
 Plugin URI: http://www.tipsandtricks-hq.com/?p=120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
 Description: Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages.
+License: GPL2
 */
 
-/*
-    This program is free software; you can redistribute it
-    under the terms of the GNU General Public License version 2,
-    as published by the Free Software Foundation.
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.2');
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-*/
-
-$wp_paypal_payment_version = 3.1;
+include_once('shortcode_view.php');
 
 // Some default options
 add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
@@ -39,28 +31,10 @@ add_option('wp_pp_ref_title', 'Your Email Address');
 add_option('wp_pp_return_url', get_bloginfo('home'));
 
 add_shortcode('wp_paypal_payment_box', 'wpapp_buy_now_button_shortcode' );
-function wpapp_buy_now_button_shortcode($atts) 
+function wpapp_buy_now_button_shortcode($args) 
 {
-	extract( shortcode_atts( array(
-			'email' => 'your@paypal-email.com',
-			'currency' => 'USD',
-			'options' => 'Payment for Service 1:15.50|Payment for Service 2:30.00|Payment for Service 3:47.00',
-			'return' => site_url(),
-			'reference' => 'Your Email Address',
-			'other_amount' => '',
-		) , $atts) );
-	$options = explode( '|' , $options);
-	$html_options = '';
-	foreach( $options as $option ) {
-		$option = explode( ':' , $option );
-		$name = esc_attr( $option[0] );
-		$price = esc_attr( $option[1] );
-		$html_options .= "<option data-product_name='{$name}' value='{$price}'>{$name} - {$price}</option>";
-
-	}
-	$payment_button_img_src = get_option('payment_button_type');
-    ob_start();
-	include('shortcode_view.php');
+	ob_start();
+    wppp_render_paypal_button_form($args);
 	$output = ob_get_contents();
     ob_end_clean();
     return $output;
@@ -188,8 +162,6 @@ function paypal_payment_add_option_pages() {
 
 function paypal_payment_options_page() {
 
-    global $wp_paypal_payment_version;
-
     if (isset($_POST['info_update']))
     {
         echo '<div id="message" class="updated fade"><p><strong>';
@@ -227,7 +199,7 @@ function paypal_payment_options_page() {
 
     <div class=wrap>
 
-    <h2>Accept Paypal Payment Settings v <?php echo $wp_paypal_payment_version; ?></h2>
+    <h2>Accept Paypal Payment Settings v <?php echo WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION; ?></h2>
 
     <div style="background: none repeat scroll 0 0 #ECECEC;border: 1px solid #CFCFCF;color: #363636;margin: 10px 0 15px;padding:15px;text-shadow: 1px 1px #FFFFFF;">
     For usage documentation and updates, please visit the plugin page at the following URL:<br />
