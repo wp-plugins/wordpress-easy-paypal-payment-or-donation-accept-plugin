@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.2
+Version: v3.3
 Plugin URI: http://www.tipsandtricks-hq.com/?p=120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
@@ -9,7 +9,7 @@ Description: Easy to use Wordpress plugin to accept paypal payment for a service
 License: GPL2
 */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.2');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.3');
 
 include_once('shortcode_view.php');
 
@@ -28,7 +28,7 @@ add_option('payment_button_type', 'https://www.paypal.com/en_US/i/btn/btn_paynow
 add_option('wp_pp_show_other_amount', '-1');
 add_option('wp_pp_show_ref_box', '1');      
 add_option('wp_pp_ref_title', 'Your Email Address');
-add_option('wp_pp_return_url', get_bloginfo('home'));
+add_option('wp_pp_return_url', home_url());
 
 add_shortcode('wp_paypal_payment_box', 'wpapp_buy_now_button_shortcode' );
 function wpapp_buy_now_button_shortcode($args) 
@@ -70,6 +70,7 @@ function Paypal_payment_accept()
 	$wp_pp_return_url = get_option('wp_pp_return_url');
 
     /* === Paypal form === */
+	$output = '';
     $output .= '<div id="accept_paypal_payment_form">';
     $output .= '
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
@@ -132,7 +133,7 @@ function Paypal_payment_accept()
 	} 
 	else 
 	{
-		$output .='<input type="hidden" name="return" value="'. get_bloginfo('home') .'" />';
+		$output .='<input type="hidden" name="return" value="'. home_url() .'" />';
 	}
 		
     $output .= "<input type=\"image\" src=\"$payment_button\" name=\"submit\" alt=\"Make payments with payPal - it's fast, free and secure!\" />";
@@ -152,11 +153,10 @@ function wp_ppp_process($content)
     return $content;
 }
 
-
 // Displays PayPal Payment Accept Options menu
 function paypal_payment_add_option_pages() {
     if (function_exists('add_options_page')) {
-        add_options_page('WP Paypal Payment Accept', 'WP PayPal Payment', 8, __FILE__, 'paypal_payment_options_page');
+        add_options_page('WP Paypal Payment Accept', 'WP PayPal Payment', 'manage_options', __FILE__, 'paypal_payment_options_page');
     }
 }
 
