@@ -10,6 +10,7 @@ function wppp_render_paypal_button_form($args)
 		'reference' => 'Your Email Address',
 		'other_amount' => '',
 		'country_code' => '',
+		'payment_subject' => '',
 	), $args));
 	
 	$options = explode( '|' , $options);
@@ -42,9 +43,18 @@ function wppp_render_paypal_button_form($args)
 
 		<div class="wp_pp_button_reference_section">
 		<label for="wp_pp_button_reference"><?php echo $reference; ?></label>
-		<br /><input type="text" name="os0" class="wp_pp_button_reference" />
+		<br />
+		<input type="hidden" name="on0" value="Reference" />
+		<input type="text" name="os0" value="" class="wp_pp_button_reference" />
 		</div>
 
+		<?php 
+		if(!empty($payment_subject)){
+		?>
+		<input type="hidden" name="on1" value="Payment Subject" />
+		<input type="hidden" name="os1" value="<?php echo $payment_subject; ?>" />
+		<?php } ?>
+		
 		<input type="hidden" name="cmd" value="_xclick">
 		<input type="hidden" name="business" value="<?php echo $email; ?>">
 		<input type="hidden" name="currency_code" value="<?php echo $currency; ?>">
@@ -69,6 +79,9 @@ margin-bottom: 10px;
 }
 .wp_paypal_button_widget{
 margin: 10px 0;
+}
+.wp_accept_pp_button_form input{
+width: auto !important;
 }
 </style>
 <script type="text/javascript">

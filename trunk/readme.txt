@@ -1,10 +1,10 @@
 === WP Easy Paypal Payment Accept ===
 Contributors: Ruhul Amin, Tips and Tricks HQ
 Donate link: http://www.tipsandtricks-hq.com
-Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now 
+Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now
 Requires at least: 3.0
-Tested up to: 3.6.1
-Stable tag: 3.2
+Tested up to: 3.7
+Stable tag: 3.3
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -13,7 +13,7 @@ Easy to use Wordpress plugin to accept paypal payment for a service or product o
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages of your site.
 
-For information, detailed documentation and updates, please visit the [WordPress PayPal Payment](http://www.tipsandtricks-hq.com/?p=120) Plugin Page
+For information, detailed documentation, video tutorial and updates, please visit the [WordPress PayPal Payment](http://www.tipsandtricks-hq.com/?p=120) Plugin Page
 
 * Quick installation and setup.
 * Easily take payment for a service from your site via PayPal.
@@ -24,9 +24,11 @@ For information, detailed documentation and updates, please visit the [WordPress
 * Accept donation on your WordPress site for a cause.
 * Allow your users to specify an amount that they wish to pay. Useful when you need to accept variable payment amount.
 * Ability to specify a reference value for the payment.
+* Ability to specify a payment subject for the payment widget.
 * Add PayPal Buy Now buttons anywhere on a WordPress post or a page.
 * Ability to set the country code to use a particular language for the PayPal checkout page.
 * Create a payment button widget to accept payment in any currency accepted by PayPal. 
+* Ability to specify a payment subject for each paypal payment widget.
 
 == Usage ==
 
@@ -51,6 +53,11 @@ There are few ways you can use this plugin:
 Visit the plugin site at http://www.tipsandtricks-hq.com/?p=120 for screenshots.
 
 == Changelog ==
+
+= 3.3 =
+- Added an option in the shortcode to specify a payment subject. This can be handy if you have multiple payment widgets on your site.
+- WordPress 3.7 compatibility
+- Fixed some deprecated calls
 
 = 3.2 =
 Added an option in the shortcode to set the country code to be used for the PayPal checkout page language.
