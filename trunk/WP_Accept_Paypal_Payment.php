@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.3
+Version: v3.4
 Plugin URI: http://www.tipsandtricks-hq.com/?p=120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
@@ -9,7 +9,7 @@ Description: Easy to use Wordpress plugin to accept paypal payment for a service
 License: GPL2
 */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.3');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.4');
 
 include_once('shortcode_view.php');
 

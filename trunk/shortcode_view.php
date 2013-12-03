@@ -11,6 +11,7 @@ function wppp_render_paypal_button_form($args)
 		'other_amount' => '',
 		'country_code' => '',
 		'payment_subject' => '',
+		'button_image' => ''
 	), $args));
 	
 	$options = explode( '|' , $options);
@@ -23,6 +24,9 @@ function wppp_render_paypal_button_form($args)
 	}
 	
 	$payment_button_img_src = get_option('payment_button_type');
+	if(!empty($button_image)){
+		$payment_button_img_src = $button_image;
+	}
 	
 ?>
 <div class="wp_paypal_button_widget">
