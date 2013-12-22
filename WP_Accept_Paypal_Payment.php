@@ -1,15 +1,15 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.4
-Plugin URI: http://www.tipsandtricks-hq.com/?p=120
+Version: v3.5
+Plugin URI: http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
 Description: Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages.
 License: GPL2
 */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.4');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.5');
 
 include_once('shortcode_view.php');
 
