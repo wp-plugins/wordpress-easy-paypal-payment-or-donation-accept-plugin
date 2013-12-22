@@ -3,8 +3,8 @@ Contributors: Ruhul Amin, Tips and Tricks HQ
 Donate link: http://www.tipsandtricks-hq.com
 Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now
 Requires at least: 3.0
-Tested up to: 3.7
-Stable tag: 3.4
+Tested up to: 3.8
+Stable tag: 3.5
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -54,6 +54,9 @@ There are few ways you can use this plugin:
 Visit the plugin site at http://www.tipsandtricks-hq.com/?p=120 for screenshots.
 
 == Changelog ==
+
+= 3.5 =
+- WordPress 3.8 compatibility
 
 = 3.4 =
 - Added an option to specify a custom button image for the payment button. You can use the "button_image" parameter in the shortcode to use a customized image for the buy button.
