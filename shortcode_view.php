@@ -1,5 +1,58 @@
 <?php 
 
+function wppp_render_paypal_button_with_other_amt($args)
+{
+	extract( shortcode_atts( array(
+		'email' => '',
+		'description' => '',	
+		'currency' => 'USD',
+		'return' => site_url(),
+		'country_code' => '',
+		'button_image' => '',
+		'cancel_url' => '',
+	), $args));	
+	
+	$output = "";
+	$payment_button_img_src = get_option('payment_button_type');
+	if(!empty($button_image)){
+		$payment_button_img_src = $button_image;
+	}
+
+	if(empty($email)){
+		$output = '<p style="color: red;">Error! Please enter your PayPal email address for the payment using the "email" parameter in the shortcode</p>';
+		return $output;
+	}
+		
+	if(empty($description)){
+		$output = '<p style="color: red;">Error! Please enter a description for the payment using the "description" parameter in the shortcode</p>';
+		return $output;
+	}
+
+	$output .= '<div class="wp_paypal_button_widget_any_amt">';
+	$output .= '<form name="_xclick" class="wp_accept_pp_button_form" action="https://www.paypal.com/cgi-bin/webscr" method="post">';	
+
+	$output .= 'Amount: <input type="text" name="amount" value="" size="5">';
+
+	$output .= '<input type="hidden" name="cmd" value="_xclick">';
+	$output .= '<input type="hidden" name="business" value="'.$email.'">';
+	$output .= '<input type="hidden" name="currency_code" value="'.$currency.'">';
+	$output .= '<input type="hidden" name="item_name" value="'.stripslashes($description).'">';
+	$output .= '<input type="hidden" name="return" value="'.$return.'" />';
+	if(!empty($cancel_url)){
+		$output .= '<input type="hidden" name="cancel_return" value="'.$cancel_url.'" />';
+	}
+	if(!empty($country_code)){
+		$output .= '<input type="hidden" name="lc" value="'.$country_code.'" />';
+	}
+
+	$output .= '<div class="wp_pp_button_submit_btn">';
+	$output .= '<input type="image" id="buy_now_button" src="'.$payment_button_img_src.'" border="0" name="submit" alt="Make payments with PayPal">';
+	$output .= '</div>';
+	$output .= '</form>';
+	$output .= '</div>';
+	return $output;
+}
+
 function wppp_render_paypal_button_form($args)
 {	
 	extract( shortcode_atts( array(
@@ -11,7 +64,8 @@ function wppp_render_paypal_button_form($args)
 		'other_amount' => '',
 		'country_code' => '',
 		'payment_subject' => '',
-		'button_image' => ''
+		'button_image' => '',
+		'cancel_url' => '',
 	), $args));
 	
 	$options = explode( '|' , $options);
@@ -66,7 +120,10 @@ function wppp_render_paypal_button_form($args)
 		<input type="hidden" name="amount" value="">
 		<input type="hidden" name="return" value="<?php echo $return; ?>" />
 		<input type="hidden" name="email" value="" />
-		<?php 
+		<?php
+		if(!empty($cancel_url)){
+			echo '<input type="hidden" name="cancel_return" value="'.$cancel_url.'" />';
+		}
 		if(!empty($country_code)){
 			echo '<input type="hidden" name="lc" value="'.$country_code.'" />';
 		}
