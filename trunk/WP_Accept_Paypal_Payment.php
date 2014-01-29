@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.5
+Version: v3.6
 Plugin URI: http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
@@ -9,26 +9,37 @@ Description: Easy to use Wordpress plugin to accept paypal payment for a service
 License: GPL2
 */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.5');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.6');
 
 include_once('shortcode_view.php');
 
-// Some default options
-add_option('wp_pp_payment_email', 'korin.iverson@gmail.com');
-add_option('paypal_payment_currency', 'USD');
-add_option('wp_pp_payment_subject', 'Plugin Service Payment');
-add_option('wp_pp_payment_item1', 'Basic Service - $10');
-add_option('wp_pp_payment_value1', '10');
-add_option('wp_pp_payment_item2', 'Gold Service - $20');
-add_option('wp_pp_payment_value2', '20');
-add_option('wp_pp_payment_item3', 'Platinum Service - $30');
-add_option('wp_pp_payment_value3', '30');
-add_option('wp_paypal_widget_title_name', 'Paypal Payment');
-add_option('payment_button_type', 'https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif');
-add_option('wp_pp_show_other_amount', '-1');
-add_option('wp_pp_show_ref_box', '1');      
-add_option('wp_pp_ref_title', 'Your Email Address');
-add_option('wp_pp_return_url', home_url());
+function wp_pp_plugin_install ()
+{
+	// Some default options
+	add_option('wp_pp_payment_email', get_bloginfo('admin_email'));
+	add_option('paypal_payment_currency', 'USD');
+	add_option('wp_pp_payment_subject', 'Plugin Service Payment');
+	add_option('wp_pp_payment_item1', 'Basic Service - $10');
+	add_option('wp_pp_payment_value1', '10');
+	add_option('wp_pp_payment_item2', 'Gold Service - $20');
+	add_option('wp_pp_payment_value2', '20');
+	add_option('wp_pp_payment_item3', 'Platinum Service - $30');
+	add_option('wp_pp_payment_value3', '30');
+	add_option('wp_paypal_widget_title_name', 'Paypal Payment');
+	add_option('payment_button_type', 'https://www.paypal.com/en_US/i/btn/btn_paynowCC_LG.gif');
+	add_option('wp_pp_show_other_amount', '-1');
+	add_option('wp_pp_show_ref_box', '1');      
+	add_option('wp_pp_ref_title', 'Your Email Address');
+	add_option('wp_pp_return_url', home_url());
+}
+register_activation_hook(__FILE__,'wp_pp_plugin_install');
+
+add_shortcode('wp_paypal_payment_box_for_any_amount', 'wpapp_buy_now_any_amt_handler');
+function wpapp_buy_now_any_amt_handler($args)
+{
+	$output = wppp_render_paypal_button_with_other_amt($args);
+	return $output;
+}
 
 add_shortcode('wp_paypal_payment_box', 'wpapp_buy_now_button_shortcode' );
 function wpapp_buy_now_button_shortcode($args) 
