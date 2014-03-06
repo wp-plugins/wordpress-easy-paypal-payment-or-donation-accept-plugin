@@ -6,6 +6,7 @@ function wppp_render_paypal_button_with_other_amt($args)
 		'email' => '',
 		'description' => '',	
 		'currency' => 'USD',
+		'reference' => '',	
 		'return' => site_url(),
 		'country_code' => '',
 		'button_image' => '',
@@ -33,6 +34,15 @@ function wppp_render_paypal_button_with_other_amt($args)
 
 	$output .= 'Amount: <input type="text" name="amount" value="" size="5">';
 
+	if(!empty($reference)){
+		$output .= '<div class="wp_pp_button_reference_section">';
+		$output .= '<label for="wp_pp_button_reference">'.$reference.'</label>';
+		$output .= '<br />';
+		$output .= '<input type="hidden" name="on0" value="Reference" />';
+		$output .= '<input type="text" name="os0" value="" class="wp_pp_button_reference" />';
+		$output .= '</div>';
+	}
+			
 	$output .= '<input type="hidden" name="cmd" value="_xclick">';
 	$output .= '<input type="hidden" name="business" value="'.$email.'">';
 	$output .= '<input type="hidden" name="currency_code" value="'.$currency.'">';
@@ -134,17 +144,6 @@ function wppp_render_paypal_button_form($args)
 	</form>	
 </div>
 
-<style>
-.wp_pp_button_selection_section, .wp_pp_button_other_amt_section, .wp_pp_button_reference_section{
-margin-bottom: 10px;
-}
-.wp_paypal_button_widget{
-margin: 10px 0;
-}
-.wp_accept_pp_button_form input{
-width: auto !important;
-}
-</style>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$('.wp_accept_pp_button_form').submit(function(e){	

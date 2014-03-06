@@ -1,10 +1,10 @@
 === WP Easy Paypal Payment Accept ===
 Contributors: Ruhul Amin, Tips and Tricks HQ
 Donate link: http://www.tipsandtricks-hq.com
-Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now, payment
+Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now, payment, currency,
 Requires at least: 3.0
 Tested up to: 3.8.1
-Stable tag: 3.6
+Stable tag: 3.7
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -56,6 +56,10 @@ There are few ways you can use this plugin:
 Visit the plugin site at http://www.tipsandtricks-hq.com/?p=120 for screenshots.
 
 == Changelog ==
+
+= 3.7 =
+- Added more parameters in the "wp_paypal_payment_box_for_any_amount" shortcode. New parameters are "reference" (for adding a reference field) and "currency" (for adding a currency code).
+- Moved some inline CSS to a CSS file.
 
 = 3.6 = 
 - Added the ability to specify a cancel URL using the "cancel_url" parameter in the shortcode

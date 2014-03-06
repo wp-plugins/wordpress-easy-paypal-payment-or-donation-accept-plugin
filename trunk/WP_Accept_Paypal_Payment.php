@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.6
+Version: v3.7
 Plugin URI: http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
@@ -9,7 +9,10 @@ Description: Easy to use Wordpress plugin to accept paypal payment for a service
 License: GPL2
 */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.6');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.7');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_URL', plugins_url('',__FILE__));
+
+//TODO - Add currency symbol option in the shortcode
 
 include_once('shortcode_view.php');
 
@@ -415,8 +418,12 @@ function wp_paypal_payment_widget_control()
     <?php
 
 }
-function widget_wp_paypal_payment_init()
+function wp_paypal_payment_init()
 {
+	wp_register_style('wpapp-styles', WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_URL.'/wpapp-styles.css');
+    wp_enqueue_style('wpapp-styles');
+        	
+	//Widget code
     $widget_options = array('classname' => 'widget_wp_paypal_payment', 'description' => __( "Display WP Paypal Payment.") );
     wp_register_sidebar_widget('wp_paypal_payment_widgets', __('WP Paypal Payment'), 'show_wp_paypal_payment_widget', $widget_options);
     wp_register_widget_control('wp_paypal_payment_widgets', __('WP Paypal Payment'), 'wp_paypal_payment_widget_control' );
@@ -427,7 +434,7 @@ add_shortcode('wp_paypal_payment', 'Paypal_payment_accept');
 if (!is_admin())
 {add_filter('widget_text', 'do_shortcode');}
 
-add_action('init', 'widget_wp_paypal_payment_init');
+add_action('init', 'wp_paypal_payment_init');
 
 // Insert the paypal_payment_add_option_pages in the 'admin_menu'
 add_action('admin_menu', 'paypal_payment_add_option_pages');
