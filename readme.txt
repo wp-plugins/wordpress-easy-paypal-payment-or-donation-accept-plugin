@@ -1,10 +1,10 @@
 === WP Easy Paypal Payment Accept ===
-Contributors: Ruhul Amin, Tips and Tricks HQ
+Contributors: Tips and Tricks HQ, Ruhul Amin
 Donate link: http://www.tipsandtricks-hq.com
 Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now, payment, currency,
 Requires at least: 3.0
-Tested up to: 3.8.1
-Stable tag: 3.7
+Tested up to: 3.9
+Stable tag: 3.8
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -17,6 +17,8 @@ For information, detailed documentation, video tutorial and updates, please visi
 
 * Quick installation and setup.
 * Easily take payment for a service from your site via PayPal.
+* The ultimate plugin to create PayPal buy now buttons.
+* Create the payment buttons on the fly and embed them anywhere on your site using a shortcode.
 * Add multiple payment widget for different services or products.
 * Ability to configure which currency you want to use to accept the payment.
 * You will need to have your own PayPal account (creating a PayPal account is free).
@@ -31,6 +33,7 @@ For information, detailed documentation, video tutorial and updates, please visi
 * Ability to specify a payment subject for each paypal payment widget.
 * Ability to specify a custom button image for the payment button.
 * Ability to specify a cancel URL for the payment widget.
+* Ability to open the payment window in a new browser tab or window.
 * Create a payment widget to accept any amount from your customer.
 
 == Usage ==
@@ -56,6 +59,10 @@ There are few ways you can use this plugin:
 Visit the plugin site at http://www.tipsandtricks-hq.com/?p=120 for screenshots.
 
 == Changelog ==
+
+= 3.8 =
+- Added a new feature to open the payment window in a new browser tab/window. Use the new_window parameter in the shortcode to use it.
+- Fixed a minor bug in the [wp_paypal_payment_box_for_any_amount] shortcode.
 
 = 3.7 =
 - Added more parameters in the "wp_paypal_payment_box_for_any_amount" shortcode. New parameters are "reference" (for adding a reference field) and "currency" (for adding a currency code).
