@@ -11,6 +11,7 @@ function wppp_render_paypal_button_with_other_amt($args)
 		'country_code' => '',
 		'button_image' => '',
 		'cancel_url' => '',
+                'new_window' => '',
 	), $args));	
 	
 	$output = "";
@@ -29,8 +30,12 @@ function wppp_render_paypal_button_with_other_amt($args)
 		return $output;
 	}
 
+        $window_target = '';
+        if(!empty($new_window)){
+            $window_target = 'target="_blank"';
+        }
 	$output .= '<div class="wp_paypal_button_widget_any_amt">';
-	$output .= '<form name="_xclick" class="wp_accept_pp_button_form" action="https://www.paypal.com/cgi-bin/webscr" method="post">';	
+	$output .= '<form name="_xclick" class="wp_accept_pp_button_form_any_amount" action="https://www.paypal.com/cgi-bin/webscr" method="post" '.$window_target.'>';
 
 	$output .= 'Amount: <input type="text" name="amount" value="" size="5">';
 
@@ -76,6 +81,7 @@ function wppp_render_paypal_button_form($args)
 		'payment_subject' => '',
 		'button_image' => '',
 		'cancel_url' => '',
+                'new_window' => '',
 	), $args));
 	
 	$options = explode( '|' , $options);
@@ -91,10 +97,15 @@ function wppp_render_paypal_button_form($args)
 	if(!empty($button_image)){
 		$payment_button_img_src = $button_image;
 	}
+        
+        $window_target = '';
+        if(!empty($new_window)){
+            $window_target = 'target="_blank"';
+        }        
 	
 ?>
 <div class="wp_paypal_button_widget">
-	<form name="_xclick" class="wp_accept_pp_button_form" action="https://www.paypal.com/cgi-bin/webscr" method="post">	
+	<form name="_xclick" class="wp_accept_pp_button_form" action="https://www.paypal.com/cgi-bin/webscr" method="post" <?php echo $window_target; ?> >	
 		<div class="wp_pp_button_selection_section">
 		<select class="wp_paypal_button_options">
 			<?php echo $html_options; ?>
