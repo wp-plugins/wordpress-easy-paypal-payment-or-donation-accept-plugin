@@ -118,16 +118,16 @@ function wppp_render_paypal_button_form($args)
 			echo 'Other Amount: <input type="text" name="other_amount" value="" size="4">';
 			echo '</div>';
 		}
-		?>
 
-		<div class="wp_pp_button_reference_section">
-		<label for="wp_pp_button_reference"><?php echo $reference; ?></label>
-		<br />
-		<input type="hidden" name="on0" value="Reference" />
-		<input type="text" name="os0" value="" class="wp_pp_button_reference" />
-		</div>
+                if(!empty($reference)){
+                    echo '<div class="wp_pp_button_reference_section">';
+                    echo '<label for="wp_pp_button_reference">'.$reference.'</label>';
+                    echo '<br />';
+                    echo '<input type="hidden" name="on0" value="Reference" />';
+                    echo '<input type="text" name="os0" value="" class="wp_pp_button_reference" />';
+                    echo '</div>';
+                }
 
-		<?php 
 		if(!empty($payment_subject)){
 		?>
 		<input type="hidden" name="on1" value="Payment Subject" />
