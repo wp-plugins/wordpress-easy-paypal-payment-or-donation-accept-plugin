@@ -3,8 +3,8 @@ Contributors: Tips and Tricks HQ, Ruhul Amin
 Donate link: http://www.tipsandtricks-hq.com
 Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now, payment, currency,
 Requires at least: 3.0
-Tested up to: 3.9
-Stable tag: 3.9
+Tested up to: 3.9.1
+Stable tag: 4.0
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -33,6 +33,7 @@ For information, detailed documentation, video tutorial and updates, please visi
 * Ability to specify a payment subject for each paypal payment widget.
 * Ability to specify a custom button image for the payment button.
 * Ability to specify a cancel URL for the payment widget.
+* Ability to collect tax for the payment (if you need to).
 * Ability to open the payment window in a new browser tab or window.
 * Create a payment widget to accept any amount from your customer. Users will specify the amount to pay (useful for donations).
 
@@ -59,6 +60,10 @@ There are few ways you can use this plugin:
 Visit the plugin site at http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120 for screenshots.
 
 == Changelog ==
+
+= 4.0 = 
+- Added two new filters to allow modification of the payer email parameter programmatically. The filters are 'wppp_widget_any_amt_email' and 'wppp_widget_email'.
+- Added a new parameter in the shortcode to override tax value. The name of the new shortcode parameter is "tax".
 
 = 3.9 =
 - Added an option to exclude the "reference" field from the payment widget. Using the parameter reference="" in the shortcode will disable that field.
