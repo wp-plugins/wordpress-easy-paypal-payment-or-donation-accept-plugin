@@ -12,8 +12,11 @@ function wppp_render_paypal_button_with_other_amt($args)
 		'button_image' => '',
 		'cancel_url' => '',
                 'new_window' => '',
+                'tax' => '',
 	), $args));	
 	
+        $email = apply_filters('wppp_widget_any_amt_email', $email);
+
 	$output = "";
 	$payment_button_img_src = get_option('payment_button_type');
 	if(!empty($button_image)){
@@ -53,6 +56,9 @@ function wppp_render_paypal_button_with_other_amt($args)
 	$output .= '<input type="hidden" name="currency_code" value="'.$currency.'">';
 	$output .= '<input type="hidden" name="item_name" value="'.stripslashes($description).'">';
 	$output .= '<input type="hidden" name="return" value="'.$return.'" />';
+        if(is_numeric($tax)){
+            $output .= '<input type="hidden" name="tax" value="'.$tax.'" />';
+        }
 	if(!empty($cancel_url)){
 		$output .= '<input type="hidden" name="cancel_return" value="'.$cancel_url.'" />';
 	}
@@ -82,8 +88,11 @@ function wppp_render_paypal_button_form($args)
 		'button_image' => '',
 		'cancel_url' => '',
                 'new_window' => '',
+                'tax' => '',
 	), $args));
 	
+        $email = apply_filters('wppp_widget_email', $email);
+                
 	$options = explode( '|' , $options);
 	$html_options = '';
 	foreach( $options as $option ) {
@@ -101,7 +110,7 @@ function wppp_render_paypal_button_form($args)
         $window_target = '';
         if(!empty($new_window)){
             $window_target = 'target="_blank"';
-        }        
+        }
 	
 ?>
 <div class="wp_paypal_button_widget">
@@ -142,6 +151,9 @@ function wppp_render_paypal_button_form($args)
 		<input type="hidden" name="return" value="<?php echo $return; ?>" />
 		<input type="hidden" name="email" value="" />
 		<?php
+                if(is_numeric($tax)){
+                    echo '<input type="hidden" name="tax" value="'.$tax.'" />';
+                }                
 		if(!empty($cancel_url)){
 			echo '<input type="hidden" name="cancel_return" value="'.$cancel_url.'" />';
 		}

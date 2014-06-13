@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: WP Easy Paypal Payment Accept
-Version: v3.9
+Version: v4.0
 Plugin URI: http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
 Author: Tips and Tricks HQ
 Author URI: http://www.tipsandtricks-hq.com/
@@ -9,7 +9,7 @@ Description: Easy to use Wordpress plugin to accept paypal payment for a service
 License: GPL2
 */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '3.9');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '4.0');
 define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_URL', plugins_url('',__FILE__));
 
 //TODO - Add currency symbol option in the shortcode
@@ -390,7 +390,7 @@ function paypal_payment_options_page() {
     </form>
     
  	<div style="background: none repeat scroll 0 0 #FFF6D5;border: 1px solid #D1B655;color: #3F2502;margin: 10px 0;padding: 5px 5px 5px 10px;text-shadow: 1px 1px #FFFFFF;">	
- 	<p>If you need a feature rich and supported plugin for accepting PayPal payment then checkout my <a href="http://www.tipsandtricks-hq.com/wordpress-estore-plugin-complete-solution-to-sell-digital-products-from-your-wordpress-blog-securely-1059" target="_blank">WP eStore Plugin</a>
+ 	<p>If you need a feature rich and supported plugin for accepting PayPal payment then check out our <a href="http://www.tipsandtricks-hq.com/wordpress-estore-plugin-complete-solution-to-sell-digital-products-from-your-wordpress-blog-securely-1059" target="_blank">WP eStore Plugin</a> (You will love the WP eStore Plugin).
     </p>
     </div>
     
