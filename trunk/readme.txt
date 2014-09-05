@@ -1,10 +1,10 @@
 === WP Easy Paypal Payment Accept ===
 Contributors: Tips and Tricks HQ, Ruhul Amin
-Donate link: http://www.tipsandtricks-hq.com
+Donate link: https://www.tipsandtricks-hq.com
 Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now, payment, currency,
 Requires at least: 3.0
-Tested up to: 3.9.1
-Stable tag: 4.0
+Tested up to: 4.0
+Stable tag: 4.1
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -13,7 +13,7 @@ Easy to use Wordpress plugin to accept paypal payment for a service or product o
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click. Can be used in the sidebar, posts and pages of your site.
 
-For information, detailed documentation, video tutorial and updates, please visit the [WordPress PayPal Payment](http://www.tipsandtricks-hq.com/?p=120) Plugin Page
+For information, detailed documentation, video tutorial and updates, please visit the [WordPress PayPal Payment](https://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120) Plugin Page
 
 * Quick installation and setup.
 * Easily take payment for a service from your site via PayPal.
@@ -36,6 +36,7 @@ For information, detailed documentation, video tutorial and updates, please visi
 * Ability to collect tax for the payment (if you need to).
 * Ability to open the payment window in a new browser tab or window.
 * Create a payment widget to accept any amount from your customer. Users will specify the amount to pay (useful for donations).
+* Create text based or image based payment buttons.
 
 == Usage ==
 
@@ -57,9 +58,14 @@ There are few ways you can use this plugin:
 
 == Screenshots ==
 
-Visit the plugin site at http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120 for screenshots.
+Visit the plugin site at https://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120 for screenshots.
 
 == Changelog ==
+
+= 4.1 =
+- The currency code will now be shown after the "Other Amount" field.
+- Added the option to create text based payment button. Use parameter "button_text" in the shortcode to use it.
+- WordPress 4.0 compatibility.
 
 = 4.0 = 
 - Added two new filters to allow modification of the payer email parameter programmatically. The filters are 'wppp_widget_any_amt_email' and 'wppp_widget_email'.
@@ -98,5 +104,5 @@ Visit the plugin site at http://www.tipsandtricks-hq.com/wordpress-easy-paypal-p
 - Added an option to specify a different amount (any amount your user whish to pay) via the shortcode.
 
 Changelog for old versions can be found at the following URL
-http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
+https://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
 
