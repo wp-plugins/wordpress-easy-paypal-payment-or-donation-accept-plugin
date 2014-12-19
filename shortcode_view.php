@@ -52,7 +52,7 @@ function wppp_render_paypal_button_with_other_amt($args)
 		$output .= '</div>';
 	}
 			
-	$output .= '<input type="hidden" name="cmd" value="_xclick">';
+	$output .= '<input type="hidden" name="cmd" value="_xclick"><input type="hidden" name="bn" value="TipsandTricks_SP" />';
 	$output .= '<input type="hidden" name="business" value="'.$email.'">';
 	$output .= '<input type="hidden" name="currency_code" value="'.$currency.'">';
 	$output .= '<input type="hidden" name="item_name" value="'.stripslashes($description).'">';
@@ -152,6 +152,7 @@ function wppp_render_paypal_button_form($args)
 		<?php } ?>
 		
 		<input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="bn" value="TipsandTricks_SP" />
 		<input type="hidden" name="business" value="<?php echo $email; ?>">
 		<input type="hidden" name="currency_code" value="<?php echo $currency; ?>">
 		<input type="hidden" name="item_name" value="">

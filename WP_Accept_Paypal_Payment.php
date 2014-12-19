@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: WP Easy Paypal Payment Accept
-  Version: v4.2
+  Version: v4.3
   Plugin URI: http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
   Author: Tips and Tricks HQ
   Author URI: http://www.tipsandtricks-hq.com/
@@ -9,7 +9,7 @@
   License: GPL2
  */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '4.2');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '4.3');
 define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_URL', plugins_url('', __FILE__));
 
 include_once('shortcode_view.php');
@@ -127,8 +127,7 @@ function Paypal_payment_accept() {
         <br /><br />
         <input type="hidden" name="no_shipping" value="0" />
         <input type="hidden" name="no_note" value="1" />
-        <input type="hidden" name="mrb" value="3FWGC6LFTMTUG" />
-        <input type="hidden" name="bn" value="IC_Sample" />
+        <input type="hidden" name="bn" value="TipsandTricks_SP" />
     ';
     if (!empty($wp_pp_return_url)) {
         $output .= '<input type="hidden" name="return" value="' . $wp_pp_return_url . '" />';
