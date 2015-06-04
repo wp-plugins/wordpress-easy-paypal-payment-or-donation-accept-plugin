@@ -62,7 +62,6 @@ There are few ways you can use this plugin:
 Visit the plugin site at https://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120 for screenshots.
 
 == Changelog ==
-
 = 4.5 =
 - The "Other Amount" input field type is now set to "number". This will work better on mobile devices.
 
