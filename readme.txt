@@ -4,7 +4,7 @@ Donate link: https://www.tipsandtricks-hq.com
 Tags: Paypal payment, Accept payment for services or product, PayPal donation, wordpress paypal, paypal for wordpress, paypal plugin for wordpress, paypal integration, paypal, buy now, payment, currency,
 Requires at least: 3.0
 Tested up to: 4.2
-Stable tag: 4.4
+Stable tag: 4.5
 License: GPLv2 or later
 
 Easy to use Wordpress plugin to accept paypal payment for a service or product or donation in one click
@@ -62,6 +62,9 @@ There are few ways you can use this plugin:
 Visit the plugin site at https://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120 for screenshots.
 
 == Changelog ==
+
+= 4.5 =
+- The "Other Amount" input field type is now set to "number". This will work better on mobile devices.
 
 = 4.4 =
 - Added a new shortcode parameter so you can optionally set the "rm" variable via the shortcode.

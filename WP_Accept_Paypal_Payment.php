@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: WP Easy Paypal Payment Accept
-  Version: v4.4
+  Version: v4.5
   Plugin URI: http://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
   Author: Tips and Tricks HQ
   Author URI: http://www.tipsandtricks-hq.com/
@@ -9,7 +9,7 @@
   License: GPL2
  */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '4.4');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '4.5');
 define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_URL', plugins_url('', __FILE__));
 
 include_once('shortcode_view.php');
@@ -113,7 +113,7 @@ function Paypal_payment_accept() {
     // Show other amount text box
     if ($wp_pp_show_other_amount == '1') {
         $output .= '<br /><br /><strong>Other Amount:</strong>';
-        $output .= '<br /><br /><input type="text" name="other_amount" size="10" title="Other Amount" value="" />';
+        $output .= '<br /><br /><input type="number" min="1" step="any" name="other_amount" title="Other Amount" value="" style="max-width:60px;" />';
     }
 
     // Show the reference text box

@@ -42,7 +42,7 @@ function wppp_render_paypal_button_with_other_amt($args)
 	$output .= '<div class="wp_paypal_button_widget_any_amt">';
 	$output .= '<form name="_xclick" class="wp_accept_pp_button_form_any_amount" action="https://www.paypal.com/cgi-bin/webscr" method="post" '.$window_target.'>';
 
-	$output .= '<div class="wp_pp_button_amount_section">Amount: <input type="text" name="amount" value="" size="5"> '.$currency.'</div>';
+	$output .= '<div class="wp_pp_button_amount_section">Amount: <input type="number" min="1" step="any" name="amount" value="" style="max-width:60px;"> '.$currency.'</div>';
 
 	if(!empty($reference)){
 		$output .= '<div class="wp_pp_button_reference_section">';
@@ -135,7 +135,7 @@ function wppp_render_paypal_button_form($args)
 		<?php 
 		if(!empty($other_amount)){
 			echo '<div class="wp_pp_button_other_amt_section">';
-			echo 'Other Amount: <input type="text" name="other_amount" value="" size="4"> '.$currency;
+			echo 'Other Amount: <input type="number" min="1" step="any" name="other_amount" value="" style="max-width:60px;"> '.$currency;
 			echo '</div>';
 		}
 
