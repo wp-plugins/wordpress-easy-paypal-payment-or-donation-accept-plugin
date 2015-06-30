@@ -8,6 +8,7 @@ function wppp_render_paypal_button_with_other_amt($args)
 		'currency' => 'USD',
 		'reference' => '',	
 		'return' => site_url(),
+                'cbt' => '',
 		'country_code' => '',
 		'button_image' => '',
                 'button_text' => '',
@@ -48,8 +49,8 @@ function wppp_render_paypal_button_with_other_amt($args)
 		$output .= '<div class="wp_pp_button_reference_section">';
 		$output .= '<label for="wp_pp_button_reference">'.$reference.'</label>';
 		$output .= '<br />';
-		$output .= '<input type="hidden" name="on0" value="Reference" />';
-		$output .= '<input type="text" name="os0" value="" class="wp_pp_button_reference" />';
+		$output .= '<input type="hidden" name="on0" value="'.apply_filters('wp_pp_button_reference_name','Reference').'" />';
+		$output .= '<input type="text" name="os0" value="'.apply_filters('wp_pp_button_reference_value','').'" class="wp_pp_button_reference" />';
 		$output .= '</div>';
 	}
 			
@@ -59,6 +60,9 @@ function wppp_render_paypal_button_with_other_amt($args)
 	$output .= '<input type="hidden" name="item_name" value="'.stripslashes($description).'">';
 	$output .= '<input type="hidden" name="return" value="'.$return.'" />';
         $output .= '<input type="hidden" name="rm" value="'.$rm.'" />';
+        if(!empty($cbt)){
+            $output .= '<input type="hidden" name="cbt" value="'.$cbt.'" />';
+        }
         if(is_numeric($tax)){
             $output .= '<input type="hidden" name="tax" value="'.$tax.'" />';
         }
@@ -86,10 +90,11 @@ function wppp_render_paypal_button_with_other_amt($args)
 function wppp_render_paypal_button_form($args)
 {	
 	extract( shortcode_atts( array(
-		'email' => 'your@paypal-email.com',
+		'email' => '',
 		'currency' => 'USD',
 		'options' => 'Payment for Service 1:15.50|Payment for Service 2:30.00|Payment for Service 3:47.00',
 		'return' => site_url(),
+                'cbt' => '',
 		'reference' => 'Your Email Address',
 		'other_amount' => '',
 		'country_code' => '',
@@ -103,7 +108,11 @@ function wppp_render_paypal_button_form($args)
 	), $args));
 	
         $email = apply_filters('wppp_widget_email', $email);
-                
+	if(empty($email)){
+		$output = '<p style="color: red;">Error! Please enter your PayPal email address for the payment using the "email" parameter in the shortcode</p>';
+		return $output;
+	}
+        
 	$options = explode( '|' , $options);
 	$html_options = '';
 	foreach( $options as $option ) {
@@ -143,8 +152,8 @@ function wppp_render_paypal_button_form($args)
                     echo '<div class="wp_pp_button_reference_section">';
                     echo '<label for="wp_pp_button_reference">'.$reference.'</label>';
                     echo '<br />';
-                    echo '<input type="hidden" name="on0" value="Reference" />';
-                    echo '<input type="text" name="os0" value="" class="wp_pp_button_reference" />';
+                    echo '<input type="hidden" name="on0" value="'.apply_filters('wp_pp_button_reference_name','Reference').'" />';
+                    echo '<input type="text" name="os0" value="'.apply_filters('wp_pp_button_reference_value','').'" class="wp_pp_button_reference" />';
                     echo '</div>';
                 }
 
@@ -160,10 +169,13 @@ function wppp_render_paypal_button_form($args)
 		<input type="hidden" name="currency_code" value="<?php echo $currency; ?>">
 		<input type="hidden" name="item_name" value="">
 		<input type="hidden" name="amount" value="">
-		<input type="hidden" name="return" value="<?php echo $return; ?>" />
+		<input type="hidden" name="return" value="<?php echo $return; ?>" />                
                 <input type="hidden" name="rm" value="<?php echo $rm; ?>" />
 		<input type="hidden" name="email" value="" />
 		<?php
+                if(!empty($cbt)){
+                    echo  '<input type="hidden" name="cbt" value="'.$cbt.'" />';
+                }
                 if(is_numeric($tax)){
                     echo '<input type="hidden" name="tax" value="'.$tax.'" />';
                 }                
