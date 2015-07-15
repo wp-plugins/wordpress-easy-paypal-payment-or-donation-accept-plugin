@@ -1,7 +1,7 @@
 <?php
 /*
   Plugin Name: WP Easy Paypal Payment Accept
-  Version: v4.6
+  Version: v4.7
   Plugin URI: https://www.tipsandtricks-hq.com/wordpress-easy-paypal-payment-or-donation-accept-plugin-120
   Author: Tips and Tricks HQ
   Author URI: https://www.tipsandtricks-hq.com/
@@ -9,11 +9,12 @@
   License: GPL2
  */
 
-define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '4.6');
+define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_VERSION', '4.7');
 define('WP_PAYPAL_PAYMENT_ACCEPT_PLUGIN_URL', plugins_url('', __FILE__));
 
 include_once('shortcode_view.php');
 include_once('wpapp_admin_menu.php');
+include_once('wpapp_paypal_utility.php');
 
 function wp_pp_plugin_install() {
     // Some default options
@@ -51,12 +52,6 @@ function wpapp_buy_now_button_shortcode($args) {
     $output = ob_get_contents();
     ob_end_clean();
     return $output;
-}
-
-add_action('init', 'wpapp_shortcode_plugin_enqueue_jquery');
-
-function wpapp_shortcode_plugin_enqueue_jquery() {
-    wp_enqueue_script('jquery');
 }
 
 function Paypal_payment_accept() {
@@ -197,6 +192,16 @@ function wp_paypal_payment_init() {
     $widget_options = array('classname' => 'widget_wp_paypal_payment', 'description' => __("Display WP Paypal Payment."));
     wp_register_sidebar_widget('wp_paypal_payment_widgets', __('WP Paypal Payment'), 'show_wp_paypal_payment_widget', $widget_options);
     wp_register_widget_control('wp_paypal_payment_widgets', __('WP Paypal Payment'), 'wp_paypal_payment_widget_control');
+    
+    //Listen for IPN and validate it
+    if (isset($_REQUEST['wpapp_paypal_ipn']) && $_REQUEST['wpapp_paypal_ipn'] == "process") {
+        wpapp_validate_paypl_ipn();
+        exit;
+    }
+}
+
+function wpapp_shortcode_plugin_enqueue_jquery() {
+    wp_enqueue_script('jquery');
 }
 
 add_filter('the_content', 'wp_ppp_process');
@@ -205,4 +210,5 @@ if (!is_admin()) {
     add_filter('widget_text', 'do_shortcode');
 }
 
+add_action('init', 'wpapp_shortcode_plugin_enqueue_jquery');
 add_action('init', 'wp_paypal_payment_init');
