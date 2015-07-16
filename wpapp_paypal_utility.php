@@ -2,7 +2,7 @@
 
 function wpapp_validate_paypl_ipn() {
 
-    $wpapp_pdt_validated = true;
+    $wpapp_ipn_validated = true;
     
     // Reading POSTed data directly from $_POST causes serialization issues with array data in the POST.
     // Instead, read raw POST data from the input stream. 
@@ -36,9 +36,7 @@ function wpapp_validate_paypl_ipn() {
     curl_setopt($ch, CURLOPT_POST, 1);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_POSTFIELDS, $req);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-    curl_setopt($ch, CURLOPT_FORBID_REUSE, 1);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array('Connection: Close'));
 
     if (!($res = curl_exec($ch))) {
@@ -51,14 +49,14 @@ function wpapp_validate_paypl_ipn() {
     // Inspect IPN validation result and act accordingly
     if (strcmp ($res, "VERIFIED") == 0) {
         // The IPN is verified, process it
-        $wpapp_pdt_validated = true;
+        $wpapp_ipn_validated = true;
     } else if (strcmp ($res, "INVALID") == 0) {
         // IPN invalid, log for manual investigation
-        $wpapp_pdt_validated = false;
+        $wpapp_ipn_validated = false;
     }
 
 
-    if (!$wpapp_pdt_validated) {
+    if (!$wpapp_ipn_validated) {
         // IPN validation failed. Email the admin to notify this event.
         $admin_email = get_bloginfo('admin_email');
         $subject = 'IPN validation failed for a payment';
